@@ -1,0 +1,9 @@
+{
+    "prettier.requireConfig": true,
+    "eslint.autoFixOnSave": true,
+    "stylelintplus.autoFixOnSave": true,
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextCurrentLineOnly": false,
+    "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+    "python.pythonPath": "/usr/local/bin/python3"
+}

@@ -1,0 +1,9 @@
+[core]
+	editor = vim
+[user]
+	name = Toms Burgmanis
+	email = toms.burgmanis@gmail.com
+[credential]
+	helper = store
+[init]
+	defaultBranch = master
