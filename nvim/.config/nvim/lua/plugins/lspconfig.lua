@@ -36,17 +36,28 @@ local lspEnsureCapabilities = coq.lsp_ensure_capabilities({
   on_attach = on_attach
 })
 
+local typescriptFiletypes = {
+  "javascript",
+  "typescript",
+  "javascriptreact",
+  "typescriptreact",
+}
+
 diagnostic.config({
   sources = {
-    diagnostic.builtins.diagnostics.eslint_d
+    diagnostic.builtins.diagnostics.eslint_d.with({
+      filetypes = typescriptFiletypes
+    }),
+    diagnostic.builtins.formatting.prettier.with({
+      filetypes = typescriptFiletypes
+    }),
   }
 })
 
-lsp['null-ls'].setup(coq.lsp_ensure_capabilities({
-  on_attach = on_attach,
-}))
+lsp['null-ls'].setup(lspEnsureCapabilities)
 lsp.gopls.setup(lspEnsureCapabilities)
 lsp.graphql.setup(lspEnsureCapabilities)
+lsp.stylelint_lsp.setup(lspEnsureCapabilities)
 lsp.tsserver.setup(coq.lsp_ensure_capabilities({
   on_attach = function(client, bufnr)
     client.resolved_capabilities.document_formatting = false
