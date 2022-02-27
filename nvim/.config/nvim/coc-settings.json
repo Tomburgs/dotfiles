@@ -4,6 +4,9 @@
     "stylelintplus.autoFixOnSave": true,
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextCurrentLineOnly": false,
-    "coc.preferences.formatOnSaveFiletypes": ["typescript"],
+    "coc.preferences.formatOnSaveFiletypes": [
+        "typescript",
+        "go"
+    ],
     "python.pythonPath": "/usr/local/bin/python3"
 }

@@ -39,7 +39,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release/rpc', 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'sheerun/vim-polyglot'
@@ -48,7 +48,6 @@ Plug 'LucHermitte/lh-vim-lib', { 'name': 'lh-vim-lib' }
 Plug 'LucHermitte/local_vimrc', { 'depends': 'lh-vim-lib' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'AndrewRadev/tagalong.vim'
 
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -66,7 +65,7 @@ let g:coc_global_extensions = [
    \ 'coc-pyright',
    \ 'coc-deno',
    \ 'coc-prettier',
-   \ 'coc-eslint',
+   \ 'coc-eslint8',
    \ 'coc-stylelintplus',
    \ 'coc-json',
    \ 'coc-css',
@@ -111,7 +110,7 @@ nnoremap <Leader>b :NERDTree %<CR>
 nnoremap <Leader>ff :FZF<CR>
 nnoremap <Leader>ft :Ag<CR>
 nnoremap <Leader>fb :Buffers<CR>
-nnoremap <Leader>gs :FzfPreviewGitStatus<CR>
+nnoremap <Leader>gs :FzfPreviewGitStatusRpc<CR>
 
 " Useful utilities
 nnoremap <silent> <Leader><CR> :noh<CR>
@@ -122,10 +121,14 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 lua <<EOF
 require('nvim-treesitter.configs').setup({
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-  },
+   ensure_installed = "maintained",
+   highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+   },
+   context_commentstring = {
+      enable = true
+   },
 })
 
 require('lualine').setup({

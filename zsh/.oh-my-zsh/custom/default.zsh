@@ -1,7 +1,7 @@
 export FZF_DEFAULT_COMMAND='ag -i -g ""'
 export BAT_THEME='Monokai Extended'
 
-export PATH=$PATH:$HOME/go/bin:$(yarn global bin)
+export PATH=$PATH:$HOME/go/bin
 
 alias vim='nvim'
 alias ll='ls -lstar'
