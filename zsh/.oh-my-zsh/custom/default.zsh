@@ -1,5 +1,6 @@
 export FZF_DEFAULT_COMMAND='ag -i -g ""'
 export BAT_THEME='Monokai Extended'
+export SBT_OPTS="-Xss4M -Xms256M -Xmx4G -XX:+HeapDumpOnOutOfMemoryError"
 
 export PATH=$PATH:$HOME/go/bin
 

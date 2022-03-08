@@ -19,6 +19,7 @@ set hlsearch
 set lazyredraw
 set showmatch
 set hidden
+set clipboard=unnamed " use system clipboard
 
 set termguicolors
 
@@ -71,6 +72,7 @@ let g:coc_global_extensions = [
    \ 'coc-css',
    \ 'coc-cssmodules',
    \ 'coc-html',
+   \ 'coc-metals',
    \ ]
 
 let g:fzf_preview_command = 'bat --color=always'
