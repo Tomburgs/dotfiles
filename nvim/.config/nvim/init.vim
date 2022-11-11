@@ -20,6 +20,7 @@ set lazyredraw
 set showmatch
 set hidden
 set clipboard=unnamed " use system clipboard
+set updatetime=300
 
 set termguicolors
 
@@ -75,6 +76,8 @@ let g:coc_global_extensions = [
    \ 'coc-metals',
    \ ]
 
+let g:dashboard_default_executive ='fzf'
+
 let g:fzf_preview_command = 'bat --color=always'
 let g:fzf_preview_quit_map = 1
 let g:fzf_preview_git_status_preview_command =
@@ -123,7 +126,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 lua <<EOF
 require('nvim-treesitter.configs').setup({
-   ensure_installed = "maintained",
    highlight = {
       enable = true,
       additional_vim_regex_highlighting = false,

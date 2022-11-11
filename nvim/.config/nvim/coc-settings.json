@@ -1,4 +1,5 @@
 {
+    "tsserver.maxTsServerMemory": 8000,
     "prettier.requireConfig": true,
     "eslint.autoFixOnSave": true,
     "stylelintplus.autoFixOnSave": true,
