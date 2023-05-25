@@ -21,6 +21,7 @@ set showmatch
 set hidden
 set clipboard=unnamed " use system clipboard
 set updatetime=300
+set mouse=
 
 set termguicolors
 
@@ -50,17 +51,22 @@ Plug 'LucHermitte/lh-vim-lib', { 'name': 'lh-vim-lib' }
 Plug 'LucHermitte/local_vimrc', { 'depends': 'lh-vim-lib' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'ellisonleao/gruvbox.nvim'
 
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'glepnir/dashboard-nvim'
 
 call plug#end()
+
+" Make it all colorful
+set background=dark
+colorscheme gruvbox
 
 let mapleader = " "
 let NERDTreeQuitOnOpen = 1
 let g:local_vimrc = ['.local.vim']
 let g:coc_global_extensions = [
+   \ 'coc-clangd',
    \ 'coc-pairs',
    \ 'coc-tsserver',
    \ 'coc-go',
@@ -75,8 +81,6 @@ let g:coc_global_extensions = [
    \ 'coc-html',
    \ 'coc-metals',
    \ ]
-
-let g:dashboard_default_executive ='fzf'
 
 let g:fzf_preview_command = 'bat --color=always'
 let g:fzf_preview_quit_map = 1
@@ -137,7 +141,7 @@ require('nvim-treesitter.configs').setup({
 
 require('lualine').setup({
   options = {
-    theme = 'nord'
+    theme = 'gruvbox'
   }
 })
 EOF
