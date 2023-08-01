@@ -8,7 +8,9 @@
     "coc.preferences.formatOnSaveFiletypes": [
         "typescript",
         "go",
+        "dart",
         "prisma"
     ],
+    "flutter.provider.hot-reload": true,
     "python.pythonPath": "/usr/local/bin/python3"
 }
