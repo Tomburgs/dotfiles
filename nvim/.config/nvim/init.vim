@@ -37,6 +37,12 @@ hi PmenuSelBold guifg=#333842 guibg=#fd971f
 hi PmenuThumb guifg=#ae81ff guibg=#a6e22e
 hi PmenuSbar guifg=NONE guifg=#3f444a
 
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -80,6 +86,8 @@ let g:coc_global_extensions = [
    \ 'coc-cssmodules',
    \ 'coc-html',
    \ 'coc-metals',
+   \ 'coc-flutter',
+   \ 'coc-prisma'
    \ ]
 
 let g:fzf_preview_command = 'bat --color=always'
@@ -112,6 +120,7 @@ nnoremap <Leader>te :tabedit <C-r>=expand("%:p:h")<CR>/
 nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition', 'drop')<CR>
 nnoremap <silent> <Leader>gr :call CocActionAsync('jumpReferences')<CR>
 nnoremap <silent> <Leader>i :call CocActionAsync('doHover')<CR>
+nnoremap <silent> <Leader>ca :call CocActionAsync('codeAction', visualmode())<CR>
 
 " File system
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
