@@ -22,6 +22,8 @@ set hidden
 set clipboard=unnamed " use system clipboard
 set updatetime=300
 set mouse=
+set formatoptions-=cro
+set cursorline
 
 set termguicolors
 
@@ -58,6 +60,7 @@ Plug 'LucHermitte/local_vimrc', { 'depends': 'lh-vim-lib' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'puremourning/vimspector'
 
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -100,6 +103,8 @@ let g:fzf_preview_git_status_preview_command =
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
 let $FZF_DEFAULT_OPTS="--ansi --preview 'bat --color=always --style=grid {}' --preview-window 'right:50%' --layout reverse --margin=1,4"
 
+let g:vimspector_enable_mappings = 'HUMAN'
+
 command! -bang -nargs=* Ag
    \ call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
 
@@ -116,11 +121,19 @@ nnoremap <Leader>to :tabonly<CR>
 nnoremap <Leader>tm :tabmove 
 nnoremap <Leader>te :tabedit <C-r>=expand("%:p:h")<CR>/
 
+nnoremap <F1> <Plug>VimspectorBalloonEval<CR>
+nnoremap <F2> :VimspectorReset<CR>
+
 " Managing COC
 nnoremap <silent> <Leader>gd :call CocActionAsync('jumpDefinition', 'drop')<CR>
 nnoremap <silent> <Leader>gr :call CocActionAsync('jumpReferences')<CR>
 nnoremap <silent> <Leader>i :call CocActionAsync('doHover')<CR>
-nnoremap <silent> <Leader>ca :call CocActionAsync('codeAction', visualmode())<CR>
+
+nnoremap <silent> <Leader>ca :call CocActionAsync('codeAction', 'cursor')<CR>
+
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+" nnoremap <silent> <Leader>ca :call CocActionAsync('codeAction', visualmode())<CR>
 
 " File system
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
@@ -136,6 +149,19 @@ nnoremap <Leader>ss :setlocal spell!<CR>
 
 " Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+function RunFlutterWithDevLog()
+   :CocCommand flutter.run --dds-port 42424
+   sleep 200m
+   :CocCommand flutter.dev.openDevLog
+endfunction
+
+" Flutter commands
+:command! FlutterRun :call RunFlutterWithDevLog()
+:command! FlutterAttach :CocCommand flutter.attach --device-vmservice-port 42424
+:command! FlutterDevLog :CocCommand flutter.dev.openDevLog
+:command! FlutterOutline :CocCommand flutter.toggleOutline
+:command! FlutterHotRestart :CocCommand flutter.dev.hotRestart
 
 lua <<EOF
 require('nvim-treesitter.configs').setup({

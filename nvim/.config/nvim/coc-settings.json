@@ -5,6 +5,7 @@
     "stylelintplus.autoFixOnSave": true,
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextCurrentLineOnly": false,
+    "dart.lineLength": 150,
     "coc.preferences.formatOnSaveFiletypes": [
         "typescript",
         "go",
