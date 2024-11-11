@@ -1,4 +1,3 @@
-local cmd = vim.cmd
 local fn = vim.fn
 
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -25,29 +24,13 @@ require('lazy').setup({
     requires = { 'kyazdani42/nvim-web-devicons' }
   },
   'folke/zen-mode.nvim',
-  'folke/twilight.nvim',
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     opts = {
       scope = { enabled = false },
-    },
+    }
   },
-  -- {
-  --   'echasnovski/mini.indentscope',
-  --   opts = {
-  --     draw = {
-  --       delay = 100,
-  --       animation = function()
-  --         return 0;
-  --       end,
-  --       priority = 2,
-  --     },
-  --     symbol = "│",
-  --     options = { try_as_border = true },
-
-  --   },
-  -- },
   -- Autopairs
   'windwp/nvim-autopairs',
   -- LSP & friends
@@ -62,7 +45,22 @@ require('lazy').setup({
   'L3MON4D3/LuaSnip',         -- Snippets
   'saadparwaiz1/cmp_luasnip', -- Make those snippets vibe with cmp
   'onsails/lspkind.nvim',     -- nvim-cmp menu formatting
-  -- 'nvimtools/none-ls.nvim',
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua', -- only load on lua files
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+      },
+    },
+  },
+  {
+    'folke/trouble.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {},
+  },
   -- Linting
   'mfussenegger/nvim-lint',
   'stevearc/conform.nvim',
@@ -84,16 +82,26 @@ require('lazy').setup({
     },
     build = 'make install',
   },
-  'zbirenbaum/copilot-cmp',
-  'zbirenbaum/copilot.lua',
   -- Debugging
   'mfussenegger/nvim-dap',
-  'rcarriga/nvim-dap-ui',
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = {
+      'theHamsta/nvim-dap-virtual-text',
+      'nvim-neotest/nvim-nio'
+    }
+  },
   {
     'microsoft/vscode-js-debug',
     build = 'rm package-lock.json && yarn --ignore-engines && yarn compile vsDebugServerBundle && mv dist out',
   },
   'mxsdev/nvim-dap-vscode-js',
+  {
+    'leoluz/nvim-dap-go',
+    config = function()
+      require('dap-go').setup()
+    end,
+  },
   {
     'Joakker/lua-json5',
     build = './install.sh'
@@ -132,5 +140,6 @@ require('plugins/lualine')
 require('plugins/treesitter')
 require('plugins/autopairs')
 require('plugins/lspconfig')
+require('plugins/dap')
 require('plugins/formatting')
 require('plugins/cmp')

@@ -22,3 +22,5 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 eval "$(atuin init zsh --disable-up-arrow)"
+
+alias sjn='docker run -it --rm -p 10000:8888 -v "${PWD}":~/jupyter quay.io/jupyter/datascience-notebook:2024-03-14'
