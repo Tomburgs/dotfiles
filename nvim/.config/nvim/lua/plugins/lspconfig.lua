@@ -1,14 +1,10 @@
 local lsp = require('lspconfig')
 local mason, mason_lspconfig = require('mason'), require('mason-lspconfig')
 local flutter_tools = require('flutter-tools')
-local dap, dap_vscode, dap_widgets, dapui, dap_js, dap_virtual_text =
+local dap, dap_vscode =
     require('dap'),
-    require('dap.ext.vscode'),
-    require('dap.ui.widgets'),
-    require('dapui'),
-    require('dap-vscode-js'),
-    require('nvim-dap-virtual-text')
-
+    require('dap.ext.vscode')
+local border_util = require('utils.border')
 local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local xbase = require('xbase')
 
@@ -17,6 +13,16 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.lsp.buf.format { async = false }
   end
+})
+
+local border = border_util.border('FloatBorder')
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = border,
+})
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = border,
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {

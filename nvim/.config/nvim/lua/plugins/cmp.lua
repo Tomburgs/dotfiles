@@ -1,19 +1,7 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 local lspkind = require('lspkind')
-
-local function border(hl_name)
-  return {
-    { '╭', hl_name },
-    { '─', hl_name },
-    { '╮', hl_name },
-    { '│', hl_name },
-    { '╯', hl_name },
-    { '─', hl_name },
-    { '╰', hl_name },
-    { '│', hl_name },
-  }
-end
+local border_util = require('utils.border')
 
 cmp.setup({
   snippet = {
@@ -42,13 +30,13 @@ cmp.setup({
   },
   window = {
     completion = {
-      border = border 'CmpBorder',
+      border = border_util.border('CmpBorder'),
       winhighlight = 'Normal:CmpPmenu,CursorLine:PmenuSel,FloatBorder:Pmenu,Search:None',
       col_offset = -3,
       side_padding = 0,
     },
     documentation = {
-      border = border 'CmpDocBorder',
+      border = border_util.border('CmpDocBorder'),
     }
   },
   formatting = {

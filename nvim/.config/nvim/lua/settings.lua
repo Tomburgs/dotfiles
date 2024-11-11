@@ -1,8 +1,4 @@
-local cmd = vim.cmd
 local env = vim.env
-local exec = vim.api.nvim_exec
-local eval = vim.api.nvim_eval
-local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 
@@ -36,21 +32,12 @@ opt.cursorline = true
 opt.termguicolors = true
 
 -- Sorry, no beige.
-cmd [[colorscheme gruvbox]]
-
-cmd [[
-  autocmd ColorScheme * hi Pmenu guifg=#f8f8f0 guibg=#333842
-  autocmd ColorScheme * hi FloatBorder guifg=#f8f8f0 guibg=#333842
-  autocmd ColorScheme * hi PmenuSel guifg=#333842 guibg=#fd971f
-  autocmd ColorScheme * hi PmenuSelBold guifg=#333842 guibg=#fd971f
-  autocmd ColorScheme * hi PmenuThumb guifg=#ae81ff guibg=#a6e22e
-  autocmd ColorScheme * hi PmenuSbar guifg=NONE guifg=#3f444a
-]]
+vim.cmd [[colorscheme gruvbox]]
 
 -- Return to last edit position when opening files
-cmd [[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
+vim.cmd [[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
 
-cmd [[
+vim.cmd [[
   command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview(), <bang>0)
 ]]
 

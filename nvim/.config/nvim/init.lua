@@ -15,7 +15,12 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
   -- Theme
-  'ellisonleao/gruvbox.nvim',
+  {
+    'ellisonleao/gruvbox.nvim',
+    opts = {
+      transparent_mode = true
+    }
+  },
   -- UI
   'mkitt/tabline.vim',
   'stevearc/dressing.nvim',
